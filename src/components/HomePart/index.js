@@ -70,7 +70,14 @@ class HomePart extends Component {
 
   successView = () => {
     const { allJobsData } = this.state;
-    return <JobItems jobDetails={allJobsData} />;
+    return (
+      <ul>
+        {allJobsData.map((jobDetails, inex) =>(
+          <JobItems key={inex} jobDetails={jobDetails} />
+
+        ))}
+    </ul>
+    )
   };
 
   getFinalRender = () => {

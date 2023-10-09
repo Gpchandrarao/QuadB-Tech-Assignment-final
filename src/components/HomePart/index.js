@@ -74,7 +74,6 @@ class HomePart extends Component {
       <ul>
         {allJobsData.map((jobDetails, inex) =>(
           <JobItems key={inex} jobDetails={jobDetails} />
-
         ))}
     </ul>
     )

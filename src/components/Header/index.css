@@ -1,0 +1,121 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Roboto";
+  }
+  
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    background-color: #272727;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 25px 0 0 25px;
+  }
+  
+  .nav-mobile-view {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .nav-mobile-view {
+      display: none;
+    }
+  }
+  
+  .nav-heading {
+    color: chocolate;
+    font-size: 30px;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .nav-heading {
+      font-size: 60px;
+    }
+  }
+  
+  .nav-mobile-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 35%;
+    list-style: none;
+  }
+  
+  .nav-mobile-link-items {
+    padding: 0;
+  }
+  
+  .nav-mobile-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .nav-mobile-icons {
+    font-size: 24px;
+    color: #f8fafc;
+  }
+  
+  .nav-desktop-view-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .nav-desktop-view-container {
+      display: none;
+    }
+  }
+  
+  .nav-menu {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    list-style: none;
+  }
+  
+  .nav-button {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .nav-menu-item {
+    font-weight: 400;
+    font-size: 26px;
+    margin: 10px;
+    text-decoration: none;
+    color: #f8fafc;
+  }
+  
+  .nav-link {
+    color: #f8fafc;
+    text-decoration: none;
+  }
+  
+  .logout-button {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 8px 32px;
+    color: #ffff;
+    background-color: #6366f1;
+    border: none;
+    margin-left: 14px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+  }
+  

@@ -1,57 +1,57 @@
-import { Component } from "react";
-import Cookies from "js-cookie";
-import { Redirect } from "react-router-dom";
+import {Component} from 'react'
+import Cookies from 'js-cookie'
+import {Redirect} from 'react-router-dom'
 
-import "./index.css";
+import './index.css'
 
 class LoginForm extends Component {
   state = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
     showSubmitError: false,
-    errorMsg: "",
-  };
+    errorMsg: '',
+  }
 
-  onSubmitFailure = (errorMsg) => {
-    this.setState({ showSubmitError: true, errorMsg });
-  };
+  onSubmitFailure = errorMsg => {
+    this.setState({showSubmitError: true, errorMsg})
+  }
 
-  onSubmitSuccess = (jwtToken) => {
-    const { history } = this.props;
-    console.log(history);
+  onSubmitSuccess = jwtToken => {
+    const {history} = this.props
+    console.log(history)
 
-    Cookies.set("jwt_token", jwtToken, { expires: 30, path: "/" });
-    history.replace("/");
-  };
+    Cookies.set('jwt_token', jwtToken, {expires: 30, path: '/'})
+    history.replace('/')
+  }
 
-  submitForm = async (event) => {
-    event.preventDefault();
-    const { username, password } = this.state;
-    const userDetails = { username, password };
-    const url = "https://apis.ccbp.in/login";
+  submitForm = async event => {
+    event.preventDefault()
+    const {username, password} = this.state
+    const userDetails = {username, password}
+    const url = 'https://apis.ccbp.in/login'
     const options = {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(userDetails),
-    };
-    const response = await fetch(url, options);
-    const data = await response.json();
-    console.log(response);
-    console.log(data);
-    if (response.ok === true) {
-      this.onSubmitSuccess();
     }
-  };
+    const response = await fetch(url, options)
+    const data = await response.json()
+    console.log(response)
+    console.log(data)
+    if (response.ok === true) {
+      this.onSubmitSuccess()
+    }
+  }
 
-  onChangeUsername = (event) => {
-    this.setState({ username: event.target.value });
-  };
+  onChangeUsername = event => {
+    this.setState({username: event.target.value})
+  }
 
-  onChangePassword = (event) => {
-    this.setState({ password: event.target.value });
-  };
+  onChangePassword = event => {
+    this.setState({password: event.target.value})
+  }
 
   renderPasswordField = () => {
-    const { password } = this.state;
+    const {password} = this.state
     return (
       <>
         <label className="label" htmlFor="password">
@@ -65,11 +65,11 @@ class LoginForm extends Component {
           onChange={this.onChangePassword}
         />
       </>
-    );
-  };
+    )
+  }
 
   renderUsernameField = () => {
-    const { username } = this.state;
+    const {username} = this.state
     return (
       <>
         <label className="label" htmlFor="username">
@@ -83,14 +83,14 @@ class LoginForm extends Component {
           onChange={this.onChangeUsername}
         />
       </>
-    );
-  };
+    )
+  }
 
   render() {
-    const { showSubmitError, errorMsg } = this.state;
-    const jwtToken = Cookies.get("jwt_token");
+    const {showSubmitError, errorMsg} = this.state
+    const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
-      return <Redirect to="/" />;
+      return <Redirect to="/" />
     }
     return (
       <div className="login-container">
@@ -103,13 +103,13 @@ class LoginForm extends Component {
           <button type="submit" className="login-but button">
             Login
           </button>
-          <button type="submit" testid="signIn" className=" button login-but">
+          <button type="submit" className=" button login-but">
             Sign in
           </button>
         </form>
       </div>
-    );
+    )
   }
 }
 
-export default LoginForm;
+export default LoginForm

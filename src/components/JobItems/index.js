@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import {Link} from 'react-router-dom'
 
-const JobItems = (props) => {
-  const { jobDetails } = props;
+const JobItems = props => {
+  const {jobDetails} = props
   const {
     companyName,
     employmentType,
@@ -12,7 +12,7 @@ const JobItems = (props) => {
     jobType,
     title,
     createdAt,
-  } = jobDetails;
+  } = jobDetails
 
   return (
     <li className="job-item">
@@ -45,7 +45,7 @@ const JobItems = (props) => {
         </div>
       </Link>
     </li>
-  );
-};
+  )
+}
 
-export default JobItems;
+export default JobItems

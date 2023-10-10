@@ -1,11 +1,11 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
-import LoginForm from "./components/LoginForm";
-import JobItems from "./components/JobItems";
+import LoginForm from './components/LoginForm'
+import JobItems from './components/JobItems'
 
-import HomePart from "./components/HomePart";
-import ProtectedRoute from "./components/ProtectedRoute";
-import "./App.css";
+import HomePart from './components/HomePart'
+import ProtectedRoute from './components/ProtectedRoute'
+import './App.css'
 
 const App = () => (
   <BrowserRouter>
@@ -15,6 +15,6 @@ const App = () => (
       <ProtectedRoute path="/jobs" component={JobItems} />
     </Switch>
   </BrowserRouter>
-);
+)
 
-export default App;
+export default App

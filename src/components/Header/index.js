@@ -1,17 +1,18 @@
-import Cookie from "js-cookie";
-import { AiFillHome } from "react-icons/ai";
-import { BsBriefcaseFill } from "react-icons/bs";
-import { FiLogOut } from "react-icons/fi";
-import { Link, withRouter } from "react-router-dom";
+// Write your code here
+import Cookie from 'js-cookie'
+import {AiFillHome} from 'react-icons/ai'
+import {BsBriefcaseFill} from 'react-icons/bs'
+import {FiLogOut} from 'react-icons/fi'
+import {Link, withRouter} from 'react-router-dom'
 
-import "./index.css";
+import './index.css'
 
-const Header = (props) => {
+const Header = props => {
   const onClickLogout = () => {
-    Cookie.remove("jwt_token");
-    const { history } = props;
-    history.replace("/login");
-  };
+    Cookie.remove('jwt_token')
+    const {history} = props
+    history.replace('/login')
+  }
   return (
     <nav className="nav-container">
       <div className="nav">
@@ -30,12 +31,12 @@ const Header = (props) => {
               </li>
             </Link>
             <li className="nav-mobile-link-items">
-              <button className="nav-mobile-button">
+              <button className="nav-mobile-button" type="button">
                 <BsBriefcaseFill className="nav-mobile-icons" />
               </button>
             </li>
             <li className="nav-mobile-link-items">
-              <button className="nav-mobile-button">
+              <button className="nav-mobile-button" type="button">
                 <FiLogOut className="nav-mobile-icons" />
               </button>
             </li>
@@ -59,7 +60,7 @@ const Header = (props) => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default withRouter(Header);
+export default withRouter(Header)

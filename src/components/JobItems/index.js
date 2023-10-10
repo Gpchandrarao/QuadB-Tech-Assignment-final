@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 const JobItems = (props) => {
   const { jobDetails } = props;
   const {
-    title,
-    jobType,
-    location,
-    description,
-    url,
-    remote,
-    employmentType,
     companyName,
+    employmentType,
+    remote,
+    url,
+    description,
+    location,
+    jobType,
+    title,
     createdAt,
   } = jobDetails;
 

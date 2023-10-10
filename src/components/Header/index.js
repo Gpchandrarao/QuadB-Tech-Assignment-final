@@ -1,14 +1,15 @@
-import Cookies from "js-cookie";
+import Cookie from "js-cookie";
 import { AiFillHome } from "react-icons/ai";
 import { BsBriefcaseFill } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
+import { Link, withRouter } from "react-router-dom";
 
 import "./index.css";
 
 const Header = (props) => {
-  const onClickLogOut = () => {
-    const { history } = this.props;
-    Cookies.remove("jwt_token");
+  const onClickLogout = () => {
+    Cookie.remove("jwt_token");
+    const { history } = props;
     history.replace("/login");
   };
   return (
@@ -17,15 +18,17 @@ const Header = (props) => {
         <div className="nav-mobile-view">
           <h1 className="nav-heading">Job Search</h1>
           <ul className="nav-mobile-button-container">
-            <li className="nav-mobile-link-items">
-              <button
-                className="nav-mobile-button"
-                type="button"
-                onClick={onClickLogOut}
-              >
-                <AiFillHome className="nav-mobile-icons" />
-              </button>
-            </li>
+            <Link to="/login">
+              <li className="nav-mobile-link-items">
+                <button
+                  className="nav-mobile-button"
+                  type="button"
+                  onClick={onClickLogout}
+                >
+                  <AiFillHome className="nav-mobile-icons" />
+                </button>
+              </li>
+            </Link>
             <li className="nav-mobile-link-items">
               <button className="nav-mobile-button">
                 <BsBriefcaseFill className="nav-mobile-icons" />
@@ -41,15 +44,17 @@ const Header = (props) => {
         <div className="nav-desktop-view-container">
           <h1 className="nav-heading">Job Search</h1>
           <ul className="nav-menu">
-            <li className="nav-menu-item">
-              <button
-                className="logout-button"
-                type="button"
-                onClick={onClickLogOut}
-              >
-                LogOut
-              </button>
-            </li>
+            <Link to="/login">
+              <li className="nav-menu-item">
+                <button
+                  className="logout-button"
+                  type="button"
+                  onClick={onClickLogout}
+                >
+                  LogOut
+                </button>
+              </li>
+            </Link>
           </ul>
         </div>
       </div>
@@ -57,4 +62,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

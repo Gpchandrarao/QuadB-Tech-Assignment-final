@@ -1,31 +1,30 @@
 import { Component } from "react";
 import Cookies from "js-cookie";
-import { Navigate } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import "./index.css";
 
 class LoginForm extends Component {
-  state = { username: "", password: "", showError: false, errorMessage: "" };
-
-  enterUserName = (event) => {
-    this.setState({ username: event.target.value });
+  state = {
+    username: "",
+    password: "",
+    showSubmitError: false,
+    errorMsg: "",
   };
 
-  enterPassword = (event) => {
-    this.setState({ password: event.target.value });
+  onSubmitFailure = (errorMsg) => {
+    this.setState({ showSubmitError: true, errorMsg });
   };
 
-  success = (jwtToken) => {
+  onSubmitSuccess = (jwtToken) => {
     const { history } = this.props;
+    console.log(history);
+
     Cookies.set("jwt_token", jwtToken, { expires: 30, path: "/" });
     history.replace("/");
   };
 
-  failure = (errorMessage) => {
-    this.setState({ showError: true, errorMessage });
-  };
-
-  submitUserDetails = async (event) => {
+  submitForm = async (event) => {
     event.preventDefault();
     const { username, password } = this.state;
     const userDetails = { username, password };
@@ -36,53 +35,75 @@ class LoginForm extends Component {
     };
     const response = await fetch(url, options);
     const data = await response.json();
+    console.log(response);
+    console.log(data);
     if (response.ok === true) {
-      this.success(data.jwt_token);
-    } else {
-      this.failure(data.error_msg);
+      this.onSubmitSuccess();
     }
   };
 
-  render() {
-    const { username, password, errorMessage, showError } = this.state;
-    const token = Cookies.get("jwt_token");
-    if (token !== undefined) {
-      return <Navigate to="/" replace={true} />;
-    }
+  onChangeUsername = (event) => {
+    this.setState({ username: event.target.value });
+  };
 
+  onChangePassword = (event) => {
+    this.setState({ password: event.target.value });
+  };
+
+  renderPasswordField = () => {
+    const { password } = this.state;
+    return (
+      <>
+        <label className="label" htmlFor="password">
+          PASSWORD
+        </label>
+        <input
+          type="password"
+          id="password"
+          className="input"
+          value={password}
+          onChange={this.onChangePassword}
+        />
+      </>
+    );
+  };
+
+  renderUsernameField = () => {
+    const { username } = this.state;
+    return (
+      <>
+        <label className="label" htmlFor="username">
+          USERNAME
+        </label>
+        <input
+          type="text"
+          id="username"
+          className="input"
+          value={username}
+          onChange={this.onChangeUsername}
+        />
+      </>
+    );
+  };
+
+  render() {
+    const { showSubmitError, errorMsg } = this.state;
+    const jwtToken = Cookies.get("jwt_token");
+    if (jwtToken !== undefined) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="login-container">
-        <form className="form-container" onSubmit={this.onSubmitForm}>
+        <form className="form-container" onSubmit={this.submitForm}>
           <h1 className="heading">Job Search</h1>
-          <div className="input-container">
-            <label htmlFor="username" className="label">
-              USERNAME
-            </label>
-            <input
-              value={username}
-              type="text"
-              id="username"
-              className="input"
-              onChange={this.enterUserName}
-            />
-          </div>
-          <div className="input-container">
-            <label htmlFor="password" className="label">
-              PASSWORD
-            </label>
-            <input
-              type="password"
-              value={password}
-              id="password"
-              className="input"
-              onChange={this.enterPassword}
-            />
-          </div>
-          {showError && <p className="error">{errorMessage}</p>}
-          <button type="submit" className="button" testid="logIn">
+          <div className="input-container">{this.renderUsernameField()}</div>
+          <div className="input-container">{this.renderPasswordField()}</div>
+          {showSubmitError && <p className="error">{errorMsg}</p>}
+
+          <button type="submit" className="login-but button">
             Login
           </button>
-          <button type="submit" testid="signIn" className="button">
+          <button type="submit" testid="signIn" className=" button login-but">
             Sign in
           </button>
         </form>

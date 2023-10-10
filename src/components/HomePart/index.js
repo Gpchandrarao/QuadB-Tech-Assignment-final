@@ -2,7 +2,7 @@ import { Component } from "react";
 import Header from "../Header";
 import Cookies from "js-cookie";
 import JobItems from "../JobItems";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./index.css";
 
 const apiStatusConstants = {
@@ -40,14 +40,15 @@ class HomePart extends Component {
       const data = await response.json();
       console.log(data);
       const updateDat = data.data.map((eachJob) => ({
+        slug: eachJob.slug,
         companyName: eachJob.company_name,
+        title: eachJob.title,
         employmentType: eachJob.employment_type,
         remote: eachJob.remote,
         url: eachJob.url,
         description: eachJob.description,
         location: eachJob.location,
         jobType: eachJob.job_type,
-        title: eachJob.title,
         createdAt: eachJob.created_at,
       }));
       console.log(updateDat);
@@ -72,11 +73,11 @@ class HomePart extends Component {
     const { allJobsData } = this.state;
     return (
       <ul>
-        {allJobsData.map((jobDetails, inex) =>(
-          <JobItems key={inex} jobDetails={jobDetails} />
+        {allJobsData.map((jobDetails, index) => (
+          <JobItems key={index} jobDetails={jobDetails} />
         ))}
-    </ul>
-    )
+      </ul>
+    );
   };
 
   getFinalRender = () => {
@@ -95,6 +96,10 @@ class HomePart extends Component {
 
   render() {
     const { searchInput } = this.state;
+    const jwtToken = Cookies.get("jwt_token");
+    if (jwtToken === undefined) {
+      return <Redirect to="/login" />;
+    }
     return (
       <>
         <Header />
@@ -107,15 +112,13 @@ class HomePart extends Component {
               value={searchInput}
               onChange={this.onChangeSearch}
             />
-            <Link to="/jobs">
-              <button
-                type="button"
-                onClick={this.onClickJobButton}
-                className="job-button"
-              >
-                Find JOb
-              </button>
-            </Link>
+            <button
+              type="button"
+              onClick={this.onClickJobButton}
+              className="job-button"
+            >
+              Find JOb
+            </button>
           </div>
         </div>
       </>
